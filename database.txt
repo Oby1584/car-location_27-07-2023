@@ -1,0 +1,86 @@
+Creer une base de données car_location
+Se mettre dessus
+
+Creer un table user
+    id entier non signé, clé primaire, auto increment
+    email chaine de caractère 255 unique
+    mdp chaine de caractère 255
+    username chaine de caractère 255
+    admin booleen
+
+
+    *** CREATE TABLE user (
+        id int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        mdp VARCHAR(255) NOT NULL UNIQUE,
+        username VARCHAR (255),
+        admin BOOLEAN
+
+    );
+
+    // Affiche la structure de ma table
+
+Creer une table car_location
+    id entier non signé, clé primaire, auto increment
+    name chaine de caractère 255
+    description text
+    image chaine de caractère 255
+    price float
+
+
+    *** CREATE TABLE car_location (
+        id int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL UNIQUE,
+        description TEXT,      
+        image VARCHAR (255),
+        price FLOAT
+        
+    );
+
+    alter table car_location modify price decimal(8, 2);
+
+
+
+Creer une table contact
+    id entier non signé, clé primaire, auto increment
+    email chaine de caractère 255
+    content text
+    date DATETIME
+
+
+    *** CREATE TABLE contact (
+        id int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        email VARCHAR(255) NOT NULL UNIQUE, (alter table car_location modify email varchar(255) not null;)
+        content TEXT,
+        date DATETIME
+
+    );
+
+Creer une table reservation
+    id entier non signé, clé primaire, auto increment
+    date_start DATE
+    date_end DATE
+    total_price float
+    id_user entier non signé clé secondaire id (user)
+    id_car entier non signé clé secondaire id (car)
+
+
+    *** CREATE TABLE reservation (
+        id int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        date_start DATE,
+        date_end DATE,
+        total_price FLOAT,
+        id_user INT UNSIGNED,
+        id_car INT UNSIGNED,
+        CONSTRAINT fk_id_user FOREIGN KEY (id_user) REFERENCES user (id)
+       
+    );
+
+
+ alter table reservation add CONSTRAINT fk_id_car_location FOREIGN KEY (id_car_location) REFERENCES car_location (id);
+
+
+alter table reservation modify total_price decimal(8, 2);
+
+
+alter table reservation add constraint fk_id_car foreign key (id_car_location) references car_location (id);
